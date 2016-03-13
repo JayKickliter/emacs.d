@@ -15,5 +15,7 @@
 
 (add-auto-mode 'conf-mode "Procfile")
 
+;; Open header for source file
+(global-set-key (kbd "C-x C-o") 'ff-find-other-file)
 
 (provide 'init-misc)
