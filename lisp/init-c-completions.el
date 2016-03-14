@@ -1,4 +1,5 @@
 (require-package 'company-irony)
+(require-package 'company-c-headers)
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -13,6 +14,6 @@
     'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
+  '(add-to-list 'company-backends 'company-irony 'company-c-headers))
 
 (provide 'init-c-completions)
