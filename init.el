@@ -64,7 +64,9 @@
 ;; (require 'init-recentf)
 (require 'init-ido)
 ;; (require 'init-hippie-expand)
-(require 'init-auto-complete)
+;; (require 'init-auto-complete)
+(require 'init-company)
+(require 'init-c-completions)
 
 (require 'init-windows)
 (require 'init-sessions)
@@ -112,6 +114,7 @@
 (require 'init-helm)
 (require 'init-c)
 (require 'init-c-tags)
+(require 'init-mouse)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
@@ -122,7 +125,7 @@
 (require 'init-ledger)
 ;; Extra packages which don't require any configuration
 
-(require-package 'gnuplot)
+; (require-package 'gnuplot)
 (require-package 'lua-mode)
 (require-package 'htmlize)
 (require-package 'dsvn)
