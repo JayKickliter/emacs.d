@@ -116,6 +116,8 @@
 (require 'init-c-tags)
 (require 'init-mouse)
 (require 'init-neotree)
+(require 'init-ninja)
+
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
