@@ -117,6 +117,7 @@
 (require 'init-mouse)
 (require 'init-neotree)
 (require 'init-ninja)
+(require 'init-projectile)
 
 
 (when *spell-check-support-enabled*
