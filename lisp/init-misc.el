@@ -1,21 +1,14 @@
 ;;----------------------------------------------------------------------------
 ;; Misc config - yet to be placed in separate files
 ;;----------------------------------------------------------------------------
-(add-auto-mode 'tcl-mode "Portfile\\'")
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(dolist (hook (if (fboundp 'prog-mode)
-                  '(prog-mode-hook ruby-mode-hook)
-                '(find-file-hooks)))
-  (add-hook hook 'goto-address-prog-mode))
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-(setq goto-address-mail-face 'link)
-
-(setq-default regex-tool-backend 'perl)
-
-(add-auto-mode 'conf-mode "Procfile")
 
 ;; Open header for source file
 (global-set-key (kbd "C-x C-o") 'ff-find-other-file)
+
+
+(require 'linum)
+(global-linum-mode t)
+;; use customized linum-format: add a addition space after the line number
+
 
 (provide 'init-misc)
