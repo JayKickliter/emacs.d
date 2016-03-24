@@ -96,7 +96,7 @@
 ;; (require 'init-css)
 ;; (require 'init-haml)
 ;; (require 'init-python-mode)
-;; (require 'init-haskell)
+(require 'init-haskell)
 ;; (require 'init-elm)
 ;; (require 'init-ruby-mode)
 ;; (require 'init-rails)
@@ -118,7 +118,7 @@
 (require 'init-neotree)
 (require 'init-ninja)
 (require 'init-projectile)
-
+(require 'init-clipboard)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))

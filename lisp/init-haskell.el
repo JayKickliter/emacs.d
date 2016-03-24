@@ -81,7 +81,10 @@
 (maybe-require-package 'hayoo)
 (after-load 'haskell-mode
   (define-key haskell-mode-map (kbd "C-c h") 'hoogle)
-  (define-key haskell-mode-map (kbd "C-o") 'open-line))
+  (define-key haskell-mode-map (kbd "C-o") 'open-line)
+  (define-key haskell-mode-map (kbd "C-c C-c") nil)
+  (define-key haskell-mode-map (kbd "C-c C-x") nil)
+  (define-key haskell-mode-map (kbd "C-c C-v") nil))
 
 
 (after-load 'page-break-lines
@@ -103,6 +106,5 @@
   (define-key interactive-haskell-mode-map (kbd "M-p") nil)
   (define-key interactive-haskell-mode-map (kbd "M-N") 'haskell-goto-next-error)
   (define-key interactive-haskell-mode-map (kbd "M-P") 'haskell-goto-prev-error))
-
 
 (provide 'init-haskell)
