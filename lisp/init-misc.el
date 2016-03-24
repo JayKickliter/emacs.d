@@ -24,4 +24,7 @@
       (comment-dwim arg)))
 (global-set-key "\M-;" 'comment-dwim-line)
 
+;; Truncate lines by default (do not wrap)
+(set-default 'truncate-lines t)
+
 (provide 'init-misc)
