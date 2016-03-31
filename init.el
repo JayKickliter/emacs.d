@@ -119,6 +119,7 @@
 (require 'init-ninja)
 (require 'init-projectile)
 (require 'init-clipboard)
+(require 'init-rust)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
