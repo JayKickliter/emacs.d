@@ -76,7 +76,7 @@
 
 (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
 
-(setq-default haskell-stylish-on-save f)
+(setq-default haskell-stylish-on-save nil)
 
 (maybe-require-package 'hayoo)
 (after-load 'haskell-mode
