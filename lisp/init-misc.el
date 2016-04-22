@@ -27,4 +27,16 @@
 ;; Truncate lines by default (do not wrap)
 (set-default 'truncate-lines t)
 
+;; compilation - hide compilation buffer on success after 2 seconds
+;; from enberg on #emacs
+(setq compilation-finish-function
+      (lambda (buf str)
+        (if (null (string-match ".*exited abnormally.*" str))
+            ;;no errors, make the compilation window go away in a few seconds
+            (progn
+              (run-at-time
+               "2 sec" nil 'delete-windows-on
+               (get-buffer-create "*compilation*"))
+                        (message "No Compilation Errors!")))))
+
 (provide 'init-misc)
