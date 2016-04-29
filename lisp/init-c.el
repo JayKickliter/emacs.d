@@ -1,4 +1,4 @@
-;; C formatting 
+;; C formatting
 (require-package 'clang-format)
 
 ;; C mode settings
@@ -31,7 +31,7 @@
 			   (goto-char (point-min))
 			   (insert ifDef)
 			   (goto-char (point-max))
-			   (insert "\n#endif" " //" fName "_H")
+			   (insert "\n#endif" " /* " fName "_H" " */")
 			   (goto-char begin))
 			 )
 		     ;else
