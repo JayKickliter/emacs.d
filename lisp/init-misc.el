@@ -27,4 +27,12 @@
 ;; Truncate lines by default (do not wrap)
 (set-default 'truncate-lines t)
 
+
+;; Map alt up/down arrow to the common keybinding for jumping to the beginning/end of a function
+;; To use, set the following key short cuts in your terminal emulator:
+;; M-↑: send hex code `0x1b 0x1b 0x5b 0x41`
+;; M-↓: send hex code `0x1b 0x1b 0x5b 0x42`
+(define-key key-translation-map (kbd "ESC <up>") (kbd "C-M-a"))
+(define-key key-translation-map (kbd "ESC <down>") (kbd "C-M-e"))
+
 (provide 'init-misc)
