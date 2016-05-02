@@ -7,7 +7,7 @@
 
 
 (require 'linum)
-(global-linum-mode t)
+(add-hook 'prog-mode-hook 'linum-mode)
 ;; use customized linum-format: add a addition space after the line number
 
 ;; Original idea from
@@ -34,5 +34,10 @@
 ;; M-↓: send hex code `0x1b 0x1b 0x5b 0x42`
 (define-key key-translation-map (kbd "ESC <up>") (kbd "C-M-a"))
 (define-key key-translation-map (kbd "ESC <down>") (kbd "C-M-e"))
+
+
+;; Prefer side-by-side windows
+(setq split-height-threshold nil)
+(setq split-width-threshold 80)
 
 (provide 'init-misc)
