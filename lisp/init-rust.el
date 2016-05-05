@@ -1,12 +1,21 @@
 (require-package 'rust-mode)
-(require-package 'racer)
+(require-package 'company-racer)
+(require-package 'flycheck)
 
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-racer))
 
-(add-hook 'racer-mode-hook #'company-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common) ;
-(setq company-tooltip-align-annotations t)
+(defun my-rust-mode-hook ()
+  (eldoc-mode)
+  (flycheck-mode)
+  (local-set-key (kbd "M-t") #'racer-find-definition))
+
+(add-hook 'rust-mode-hook 'my-rust-mode-hook)
+
+(with-eval-after-load "racer"
+  '(progn
+     (define-key racer-mode-map (kbd "M-t") #'racer-find-definition)))
 
 (provide 'init-rust)
