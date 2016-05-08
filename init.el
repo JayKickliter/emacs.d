@@ -66,7 +66,6 @@
 ;; (require 'init-hippie-expand)
 ;; (require 'init-auto-complete)
 (require 'init-company)
-(require 'init-c-completions)
 
 (require 'init-windows)
 (require 'init-sessions)
@@ -113,7 +112,6 @@
 (require 'init-hideshow)
 (require 'init-helm)
 (require 'init-c)
-(require 'init-c-tags)
 (require 'init-mouse)
 (require 'init-neotree)
 (require 'init-ninja)

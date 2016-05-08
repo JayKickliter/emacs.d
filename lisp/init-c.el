@@ -1,13 +1,65 @@
-;; C formatting
+;;; Completions
+(require-package 'company-irony)
+(require-package 'company-c-headers)
+
+(add-hook 'c-mode-common-hook 'irony-mode)
+
+;; Replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's asynchronous function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(after-load 'company
+  (add-to-list 'company-backends 'company-irony))
+
+
+;;; Eldoc integration
+(add-hook 'irony-mode-hook 'irony-eldoc)
+
+
+;;; Flycheck integration
+(require-package 'flycheck-irony)
+(after-load 'flycheck
+   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(add-hook 'c-mode-common-hook 'flycheck-mode)
+
+
+;;; Basic settings
+(setq-default c-basic-offset 4)
+
+
+;;; Formatting
 (require-package 'clang-format)
 
-;; C mode settings
-(setq-default c-basic-offset 4)
-(add-hook 'c-mode-common-hook
-	  (lambda () (c-toggle-auto-state 1))
-	  (lambda () (hs-minor-mode 1)))
+
+;;; Tags
+(require-package 'helm-gtags)
 
-; Create Header Guards with f12
+(add-hook 'c-mode-common-hook 'helm-gtags-mode)
+(add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+;; customize
+(custom-set-variables
+ '(helm-gtags-path-style 'relative)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-auto-update t))
+
+;; key bindings
+(after-load "helm-gtags"
+     (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+     (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+     (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+     (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+     (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+     (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack))
+
+
+;;; Create Header Guards with f12
 (global-set-key [f12]
 		'(lambda ()
 		   (interactive)
@@ -39,4 +91,5 @@
 		     )
 		   )
 		)
+
 (provide 'init-c)
