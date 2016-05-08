@@ -35,9 +35,4 @@
 (define-key key-translation-map (kbd "ESC <up>") (kbd "C-M-a"))
 (define-key key-translation-map (kbd "ESC <down>") (kbd "C-M-e"))
 
-
-;; Prefer side-by-side windows
-(setq split-height-threshold nil)
-(setq split-width-threshold 80)
-
 (provide 'init-misc)
