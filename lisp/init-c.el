@@ -18,6 +18,7 @@
 
 
 ;;; Eldoc integration
+(require-package 'irony-eldoc)
 (add-hook 'irony-mode-hook 'irony-eldoc)
 
 
