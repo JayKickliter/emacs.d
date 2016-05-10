@@ -35,4 +35,7 @@
 (define-key key-translation-map (kbd "ESC <up>") (kbd "C-M-a"))
 (define-key key-translation-map (kbd "ESC <down>") (kbd "C-M-e"))
 
+;; Alignment
+(global-set-key (kbd "C-x a a") 'align-current)
+
 (provide 'init-misc)
