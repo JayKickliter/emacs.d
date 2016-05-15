@@ -76,6 +76,7 @@
 (require 'init-haskell)
 
 (require 'init-paredit)
+(require 'init-yas)
 
 (require 'init-hideshow)
 (require 'init-helm)
