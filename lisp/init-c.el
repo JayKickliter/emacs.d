@@ -35,6 +35,15 @@
 
 ;;; Formatting
 (require-package 'clang-format)
+(defun clang-format-region-or-buffer ()
+  "Run clang-format on region or buffer."
+  (interactive)
+  (if (region-active-p)
+      (clang-format-region (region-beginning) (region-end))
+    (clang-format-buffer)))
+
+(add-hook 'c-mode-hook
+          (lambda () (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)))
 
 
 ;;; Tags
