@@ -2,7 +2,16 @@
 
 
 ;; Completion
+;; Install dependencies:
+;;   stack install ghc-mod
+;;   stack install hoogle
+(require-package 'company-ghc)
+(after-load 'company
+  (add-to-list 'company-backends 'company-ghc))
 
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 
 ;; Flycheck specifics
