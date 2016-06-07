@@ -38,4 +38,8 @@
 ;; Alignment
 (global-set-key (kbd "C-x a a") 'align-current)
 
+;; Golden radio mode
+(require-package 'golden-ratio)
+(golden-ratio-mode)
+
 (provide 'init-misc)
