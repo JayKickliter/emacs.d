@@ -42,4 +42,9 @@
 (require-package 'golden-ratio)
 (golden-ratio-mode)
 
+
+;; Powerline
+(require-package 'powerline)
+(powerline-default-theme)
+
 (provide 'init-misc)
