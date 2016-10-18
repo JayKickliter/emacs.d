@@ -48,6 +48,12 @@
             (hs-minor-mode)
             (hs-hide-all)))
 
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
+            (hs-minor-mode)
+            (hs-hide-all)))
+
 
 ;;; Tags
 (require-package 'helm-gtags)
