@@ -43,3 +43,4 @@ site-lisp/package/
 /viper
 /irony
 projectile-bookmarks.eld
+projectile.cache
