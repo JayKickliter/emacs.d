@@ -52,7 +52,10 @@
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
             (hs-minor-mode)
-            (hs-hide-all)))
+            (hs-hide-all)
+            (setq comment-start   "/*"
+                  comment-end     "*/"
+                  comment-padding " ")))
 
 
 ;;; Tags
