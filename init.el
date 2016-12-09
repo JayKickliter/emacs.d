@@ -88,6 +88,8 @@
 (require 'init-clipboard)
 (require 'init-rust)
 
+(require 'cauterize)
+
 (when *spell-check-support-enabled*
   (require 'init-spelling))
 
