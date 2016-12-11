@@ -18,11 +18,7 @@
     (let ((synTable (make-syntax-table)))
         (modify-syntax-entry ?; "<" synTable)
         (modify-syntax-entry ?\n ">" synTable)
-        (modify-syntax-entry ?( "($")
-        (modify-syntax-entry ?) ")^")
         synTable))
-
-
 
 (define-derived-mode cauterize-mode prog-mode "cauterize"
     "cauterize-mode is a major mode for editing Cauterize files"
