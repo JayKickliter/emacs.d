@@ -5,7 +5,8 @@
 
 (defun my-rust-mode-hook ()
   (racer-mode)
-  (flycheck-mode))
+  (flycheck-mode)
+  (hs-minor-mode))
 
 (add-hook 'rust-mode-hook 'my-rust-mode-hook)
 (add-hook 'racer-mode-hook 'eldoc-mode)
