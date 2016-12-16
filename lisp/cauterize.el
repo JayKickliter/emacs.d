@@ -7,11 +7,11 @@
 (defvar cauterize-mode-font-lock nil "Highlighting expressions for Cauterize mode.")
 (setq cauterize-mode-font-lock
   (list
-   '("\\(name\\|version\\|type\\|array\\|vector\\|union\\|fields\\|field\\|empty\\|synonym\\|enumeration\\|record\\|values\\)"
-     . font-lock-keyword-face)
+   '("\\( \\|\t\\|(\\)\\(name\\|version\\|type\\|array\\|vector\\|union\\|fields\\|field\\|empty\\|synonym\\|enumeration\\|record\\|values\\)"
+     . (2 font-lock-keyword-face))
    ;; bool, s8, u64, f32, etc.
-   '("\\(bool\\|[us]\\(8\\|16\\|32\\|64\\)\\|f\\(32\\|64\\)\\)"
-     . font-lock-type-face)))
+   '("\\( \\|\t\\)\\(bool\\|[us]\\(8\\|16\\|32\\|64\\)\\|f\\(32\\|64\\)\\)\\( \\|\t\\|)\\)"
+     . (2 font-lock-type-face))))
 
 (defvar cauterize-mode-syntax-table)
 (setq cauterize-mode-syntax-table
