@@ -8,4 +8,7 @@
 (helm-projectile-on)
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
+(eval-after-load 'projectile '(define-key projectile-mode-map (kbd "C-c p s r")
+                                'projectile-ripgrep))
+
 (provide 'init-projectile)
