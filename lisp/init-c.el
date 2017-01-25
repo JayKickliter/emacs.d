@@ -57,6 +57,11 @@
                   comment-end     "*/"
                   comment-padding " ")))
 
+;; Don't indent in extern "C" regions
+(add-hook 'c-mode-common-hook
+          (lambda()
+            (c-set-offset 'inextern-lang 0)))
+
 
 ;;; Tags
 (require-package 'helm-gtags)
