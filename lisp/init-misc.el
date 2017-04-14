@@ -64,4 +64,20 @@
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'elisp-format-buffer)))
 
+(defcustom compilation-hide-on-success t
+  "Hides *compilation* window if compilation is successful."
+  :type 'boolean
+  :group 'compilation)
+
+;; compilation - hide compilation buffer on success after 2 seconds
+;; from enberg on #emacs
+(setq compilation-finish-function
+      (lambda (buf str)
+        (if (bound-and-true-p compilation-hide-on-success)
+            (if (null (string-match ".*exited abnormally.*" str))
+                ;;no errors, make the compilation window go away in a few seconds
+                (progn (run-at-time "2 sec" nil 'delete-windows-on (get-buffer-create
+                                                                    "*compilation*"))
+                       (message "No Compilation Errors!"))))))
+
 (provide 'init-misc)
