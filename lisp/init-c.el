@@ -43,14 +43,12 @@
 (add-hook 'c-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
-            (hs-minor-mode)
-            (hs-hide-all)))
+            (hs-minor-mode)))
 
 (add-hook 'c++-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
             (hs-minor-mode)
-            (hs-hide-all)
             (setq comment-start   "/*" comment-end     "*/" comment-padding " ")))
 
 ;; Don't indent in extern "C" regions

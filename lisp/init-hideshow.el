@@ -4,6 +4,8 @@
             (global-set-key (kbd "C-c s a") 'hs-show-all)
             (global-set-key (kbd "C-c s s") 'hs-show-block)
             (global-set-key (kbd "C-c h h") 'hs-hide-block)
+            (global-set-key (kbd "C-c s l") 'hs-show-level)
+            (global-set-key (kbd "C-c h l") 'hs-hide-level)
             (set hs-isearch-open t)
             (setq hs-hide-comments-when-hiding-all nil)))
 
