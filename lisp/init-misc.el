@@ -97,4 +97,15 @@
 
 (global-set-key (kbd "C-c b b") 'bjm-comment-box)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Cycle between snake case, camel case, etc.                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'string-inflection)
+(global-set-key (kbd "C-c i") 'string-inflection-cycle)
+(global-set-key (kbd "C-c c u") 'string-inflection-camelcase) ;; Force to CamelCase
+(global-set-key (kbd "C-c c l") 'string-inflection-lower-camelcase) ;; Force to lowerCamelCase
+(global-set-key (kbd "C-c c s") 'string-inflection-underscore) ;; Force to snake_case
+
+
 (provide 'init-misc)
