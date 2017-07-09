@@ -108,4 +108,10 @@
 (global-set-key (kbd "C-c c s") 'string-inflection-underscore) ;; Force to snake_case
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GDB                                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.gdb\\'" . gdb-script-mode))
+
+
 (provide 'init-misc)
