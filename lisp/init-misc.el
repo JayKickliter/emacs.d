@@ -101,7 +101,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Cycle between snake case, camel case, etc.                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'string-inflection)
+(require-package 'string-inflection)
 (global-set-key (kbd "C-c i") 'string-inflection-cycle)
 (global-set-key (kbd "C-c c u") 'string-inflection-camelcase) ;; Force to CamelCase
 (global-set-key (kbd "C-c c l") 'string-inflection-lower-camelcase) ;; Force to lowerCamelCase
