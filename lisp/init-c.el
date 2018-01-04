@@ -33,24 +33,17 @@
 
 ;;; Formatting
 (require-package 'clang-format)
-(defun clang-format-region-or-buffer ()
-  "Run clang-format on region or buffer."
-  (interactive)
-  (if (region-active-p)
-      (clang-format-region (region-beginning)
-                           (region-end))
-    (clang-format-buffer)))
 
 (add-hook 'c-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
+            (local-set-key (kbd "C-c C-f") 'clang-format)
             (hs-minor-mode)))
 
 (add-hook 'c++-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
+            (local-set-key (kbd "C-c C-f") 'clang-format)
             (hs-minor-mode)
-            (setq comment-start   "/*" comment-end     "*/" comment-padding " ")))
+            (setq comment-start "/*" comment-end "*/" comment-padding " ")))
 
 ;; Don't indent in extern "C" regions
 (add-hook 'c-mode-common-hook
