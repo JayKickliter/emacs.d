@@ -15,6 +15,7 @@
   (global-set-key (kbd "A-<right>") 'right-word)
   (global-set-key (kbd "A-<up>") 'beginning-of-defun)
   (global-set-key (kbd "A-<down>") 'end-of-defun)
+  (global-set-key (kbd "A-<backspace>") 'backward-kill-word)
   (global-set-key (kbd "M-<left>") 'move-beginning-of-line)
   (global-set-key (kbd "M-<right>") 'move-end-of-line)
   (after-load 'nxml-mode (define-key nxml-mode-map (kbd "M-h") nil))
