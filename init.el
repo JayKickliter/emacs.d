@@ -89,6 +89,7 @@
 (require 'init-rust)
 
 (require 'cauterize)
+(require 'init-tex)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
