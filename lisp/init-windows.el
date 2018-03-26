@@ -18,14 +18,15 @@
 ;;----------------------------------------------------------------------------
 (defun split-window-func-with-other-buffer (split-function)
   (lexical-let ((s-f split-function))
-    (lambda (&optional arg)
+    (lambda
+      (&optional
+       arg)
       "Split this window and switch to the new window unless ARG is provided."
       (interactive "P")
       (funcall s-f)
       (let ((target-window (next-window)))
         (set-window-buffer target-window (other-buffer))
-        (unless arg
-          (select-window target-window))))))
+        (unless arg (select-window target-window))))))
 
 (global-set-key "\C-x2" (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key "\C-x3" (split-window-func-with-other-buffer 'split-window-horizontally))
@@ -34,7 +35,8 @@
   "Delete other windows in frame if any, or restore previous window config."
   (interactive)
   (if (and winner-mode
-           (equal (selected-window) (next-window)))
+           (equal (selected-window)
+                  (next-window)))
       (winner-undo)
     (delete-other-windows)))
 
@@ -45,15 +47,13 @@
 ;;----------------------------------------------------------------------------
 (defun split-window-horizontally-instead ()
   (interactive)
-  (save-excursion
-    (delete-other-windows)
-    (funcall (split-window-func-with-other-buffer 'split-window-horizontally))))
+  (save-excursion (delete-other-windows)
+                  (funcall (split-window-func-with-other-buffer 'split-window-horizontally))))
 
 (defun split-window-vertically-instead ()
   (interactive)
-  (save-excursion
-    (delete-other-windows)
-    (funcall (split-window-func-with-other-buffer 'split-window-vertically))))
+  (save-excursion (delete-other-windows)
+                  (funcall (split-window-func-with-other-buffer 'split-window-vertically))))
 
 (global-set-key "\C-x|" 'split-window-horizontally-instead)
 (global-set-key "\C-x_" 'split-window-vertically-instead)
@@ -65,9 +65,8 @@
 Call a second time to restore the original window configuration."
   (interactive)
   (if (eq last-command 'sanityinc/split-window)
-      (progn
-        (jump-to-register :sanityinc/split-window)
-        (setq this-command 'sanityinc/unsplit-window))
+      (progn (jump-to-register :sanityinc/split-window)
+             (setq this-command 'sanityinc/unsplit-window))
     (window-configuration-to-register :sanityinc/split-window)
     (switch-to-buffer-other-window nil)))
 
@@ -81,8 +80,7 @@ Call a second time to restore the original window configuration."
   (let* ((window (selected-window))
          (was-dedicated (window-dedicated-p window)))
     (set-window-dedicated-p window (not was-dedicated))
-    (message "Window %sdedicated to %s"
-             (if was-dedicated "no longer " "")
+    (message "Window %sdedicated to %s" (if was-dedicated "no longer " "")
              (buffer-name))))
 
 (global-set-key (kbd "C-c <down>") 'sanityinc/toggle-current-window-dedication)
@@ -92,5 +90,10 @@ Call a second time to restore the original window configuration."
 (unless (memq window-system '(nt w32))
   (windmove-default-keybindings 'control))
 
+(global-set-key [f5]
+                (lambda ()
+                  (interactive)
+                  (revert-buffer t t t)
+                  (message "buffer is reverted")))
 
 (provide 'init-windows)
