@@ -1,12 +1,17 @@
+;; -*- lexical-binding: t -*-
+(setq debug-on-error t)
 
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
 
-(let ((minver "23.3"))
-  (when (version<= emacs-version "23.1")
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version<= emacs-version "24")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
+(let ((minver "24.3"))
+  (when (version< emacs-version minver)
+    (error
+     "Your Emacs is too old -- this config requires v%s or higher"
+     minver)))
+(when (version< emacs-version "24.5")
+  (message
+   "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'init-benchmarking) ;; Measure startup time
@@ -21,7 +26,8 @@
   "Initial value of `gc-cons-threshold' at start-up time.")
 (setq gc-cons-threshold (* 128 1024 1024))
 (add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
+          (lambda ()
+            (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config
@@ -31,7 +37,7 @@
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
+(require 'init-elpa) ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
 
 ;;----------------------------------------------------------------------------
@@ -44,10 +50,8 @@
 ;;----------------------------------------------------------------------------
 
 (require-package 'wgrep)
-(require-package 'project-local-variables)
 (require-package 'diminish)
 (require-package 'scratch)
-(require-package 'mwe-log-commands)
 
 (require 'init-frame-hooks)
 (require 'init-themes)
@@ -71,7 +75,6 @@
 
 (require 'init-compile)
 (require 'init-markdown)
-(require 'init-csv)
 (require 'init-erlang)
 (require 'init-haskell)
 
@@ -102,8 +105,7 @@
 (require-package 'lua-mode)
 (require-package 'htmlize)
 (require-package 'dsvn)
-(when *is-a-mac*
-  (require-package 'osx-location))
+(when *is-a-mac* (require-package 'osx-location))
 (require-package 'regex-tool)
 
 ;;----------------------------------------------------------------------------
@@ -125,7 +127,8 @@
 ;; Allow users to provide an optional "init-local" containing personal settings
 ;;----------------------------------------------------------------------------
 (when (file-exists-p (expand-file-name "init-local.el" user-emacs-directory))
-  (error "Please move init-local.el to ~/.emacs.d/lisp"))
+  (error
+   "Please move init-local.el to ~/.emacs.d/lisp"))
 (require 'init-local nil t)
 
 
@@ -136,8 +139,8 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (message "init completed in %.2fms"
-                     (sanityinc/time-subtract-millis after-init-time before-init-time))))
+            (message "init completed in %.2fms" (sanityinc/time-subtract-millis after-init-time
+                                                                                before-init-time))))
 
 
 (provide 'init)
