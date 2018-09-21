@@ -1,15 +1,16 @@
-(when (< emacs-major-version 24)
-  (require-package 'color-theme))
-
 (require-package 'color-theme-solarized)
 
-(load-theme 'solarized t)
+;; If you don't customize it, this is the theme you get.
+(setq-default custom-enabled-themes '(solarized))
 
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-              (set-frame-parameter frame 'background-mode mode)
-              (set-terminal-parameter frame 'background-mode mode))
-                        (enable-theme 'solarized)))
+;; Ensure that themes will be applied even if they have not been customized
+(defun reapply-themes ()
+  "Forcibly load the themes listed in `custom-enabled-themes'."
+  (dolist (theme custom-enabled-themes)
+    (unless (custom-theme-p theme)
+      (load-theme theme)))
+  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
+
+(add-hook 'after-init-hook 'reapply-themes)
 
 (provide 'init-themes)
