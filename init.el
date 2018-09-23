@@ -93,6 +93,7 @@
 
 (require 'cauterize)
 (require 'init-tex)
+(require 'init-yaml)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
