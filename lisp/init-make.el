@@ -21,7 +21,7 @@
           (lambda ()
             (setq-local indent-line-function 'my-makefile-indent-line)))
 
-(add-to-list 'auto-mode-alist '("_defconfig\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '(".*_defconfig\\'" . makefile-mode))
 
 (provide 'init-make)
 ;;; init-make.el ends here

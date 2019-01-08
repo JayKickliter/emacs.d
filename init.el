@@ -91,8 +91,10 @@
 (require 'init-rust)
 
 (require 'cauterize)
+(require 'kconfig)
 (require 'init-tex)
 (require 'init-yaml)
+(require 'init-tramp)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
