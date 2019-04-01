@@ -2,8 +2,6 @@
 (require-package 'company-irony)
 (require-package 'company-irony-c-headers)
 
-(add-hook 'c-mode-common-hook 'irony-mode)
-
 ;; Replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's asynchronous function
 (defun my-irony-mode-hook ()
@@ -23,7 +21,14 @@
 ;;; Flycheck integration
 (require-package 'flycheck-irony)
 (after-load 'flycheck (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-(add-hook 'c-mode-common-hook 'flycheck-mode)
+;; (add-hook 'c-mode-common-hook 'flycheck-mode)
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (unless (and buffer-file-name
+                         (file-remote-p buffer-file-name))
+              (irony-mode 1)
+              (flycheck-mode 1))))
 
 
 ;;; Basic settings
