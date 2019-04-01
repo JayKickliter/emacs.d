@@ -92,7 +92,9 @@
                    (if (buffer-file-name)
                        (let* ((fName (upcase (file-name-nondirectory (file-name-sans-extension
                                                                       buffer-file-name))))
-                              (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H" "\n"))
+                              (uId (format "%08X" (random (expt 16 8))))
+                              (ifDef (concat "#ifndef " fName "_" uId "\n#define " fName "_" uId
+                                             "\n"))
                               (begin (point-marker)))
                          (progn
 					; If less then 5 characters are in the buffer, insert the class definition
@@ -107,7 +109,7 @@
 			   (goto-char (point-min))
                            (insert ifDef)
                            (goto-char (point-max))
-                           (insert "\n#endif" " /* " fName "_H" " */")
+                           (insert "\n#endif" " /* " fName "_" uId " */")
                            (goto-char begin)))
                                         ;else
 		     (message (concat "Buffer " (buffer-name) " must have a filename")))))
