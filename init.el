@@ -18,6 +18,9 @@
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+;; Allow shortened y/n responses to prompts
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;;----------------------------------------------------------------------------
 ;; Temporarily reduce garbage collection during startup
 ;;----------------------------------------------------------------------------
@@ -94,7 +97,6 @@
 (require 'kconfig)
 (require 'init-tex)
 (require 'init-yaml)
-(require 'init-tramp)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
