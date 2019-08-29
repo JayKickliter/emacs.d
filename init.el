@@ -61,6 +61,7 @@
 (require 'init-gui-frames)
 
 (require 'init-isearch)
+(require 'init-lsp)
 (require 'init-flycheck)
 (require 'init-ido)
 (require 'init-company)
