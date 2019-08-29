@@ -94,7 +94,6 @@
 (require 'init-rust)
 
 (require 'cauterize)
-; (require 'kconfig)
 (require 'init-tex)
 (require 'init-yaml)
 
