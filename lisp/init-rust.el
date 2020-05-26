@@ -1,8 +1,7 @@
 (use-package lsp-mode
   :ensure t
   :hook (rust-mode . lsp)
-  :commands lsp
-  :config ((setq lsp-idle-delay .500)))
+  :commands lsp)
 
 (use-package lsp-ui
   :ensure t)
