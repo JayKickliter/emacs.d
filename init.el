@@ -54,6 +54,7 @@
 (require-package 'wgrep)
 (require-package 'diminish)
 (require-package 'scratch)
+(require-package 'use-package)
 
 (require 'init-frame-hooks)
 (require 'init-themes)
