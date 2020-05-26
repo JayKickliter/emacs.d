@@ -8,6 +8,7 @@
 (setq projectile-buffers-filter-function 'projectile-buffers-with-file)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "<f13>") 'projectile-switch-to-buffer)
+(setq projectile-mode-line "Proj")
 
 (defun neotree-project-dir ()
   "Open NeoTree using the git root."
