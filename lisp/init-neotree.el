@@ -7,6 +7,4 @@
 (add-hook 'golden-ratio-mode-hook
           (lambda () (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")))
 
-(setq neo-window-width '40)
-
 (provide 'init-neotree)

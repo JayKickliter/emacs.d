@@ -1,7 +1,4 @@
-(ignore-errors
-  (require-package 'erlang))
-
-(when (package-installed-p 'erlang)
-  (require 'erlang-start))
+(use-package erlang-mode-abbrev-table
+  :bind(("C-c C-f" . erlang-indent-current-buffer)))
 
 (provide 'init-erlang)
