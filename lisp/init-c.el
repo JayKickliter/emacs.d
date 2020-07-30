@@ -1,43 +1,25 @@
-;;; Completions
-(require-package 'company-irony)
-(require-package 'company-irony-c-headers)
-
-;; Replace the `completion-at-point' and `complete-symbol' bindings in
-;; irony-mode's buffers by irony-mode's asynchronous function
-(defun my-irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point] 'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol] 'irony-completion-at-point-async))
-
-(add-hook 'irony-mode-hook 'my-irony-mode-hook)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-(after-load 'company (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
-
-
-;;; Eldoc integration
-(require-package 'irony-eldoc)
-(add-hook 'irony-mode-hook 'irony-eldoc)
-
-
-;;; Flycheck integration
-(require-package 'flycheck-irony)
-(after-load 'flycheck (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-;; (add-hook 'c-mode-common-hook 'flycheck-mode)
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (unless (and buffer-file-name
-                         (file-remote-p buffer-file-name))
-              (irony-mode 1)
-              (flycheck-mode 1))))
-
 
 ;;; Basic settings
 (setq-default c-basic-offset 4)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
+;;; Code completion and analysis
+(use-package lsp-mode :commands lsp)
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda ()
+           (require 'ccls)
+           (lsp))))
+
+
 ;;; Formatting
-(require-package 'clang-format)
+(use-package clang-format
+  :ensure t)
+
 (defun clang-format-region-or-buffer ()
   "Run clang-format on region or buffer."
   (interactive)
@@ -64,25 +46,22 @@
 
 
 ;;; Tags
-(require-package 'helm-gtags)
-
-(add-hook 'c-mode-common-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-;; customize
-(custom-set-variables '(helm-gtags-path-style 'relative)
-                      '(helm-gtags-ignore-case t)
-                      '(helm-gtags-auto-update t))
-
-;; key bindings
-(after-load "helm-gtags" (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
-            (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-            (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
-            (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
-            (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-            (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-            (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-find-tag-from-here)
-            (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack))
+(use-package helm-gtags
+  :ensure t
+  :hook((c-mode-common-hook . helm-gtags-mode)
+        (asm-mode-hook . helm-gtags-mode))
+  :custom
+  (helm-gtags-path-style 'relative)
+  (helm-gtags-ignore-case t)
+  (helm-gtags-auto-update t)
+  :bind (("M-t"     . helm-gtags-find-tag)
+         ("M-r"     . helm-gtags-find-rtag)
+         ("M-s"     . helm-gtags-find-symbol)
+         ("M-g M-p" . helm-gtags-parse-file)
+         ("C-c <"   . helm-gtags-previous-history)
+         ("C-c >"   . helm-gtags-next-history)
+         ("M-."     . helm-gtags-find-tag-from-here)
+         ("M-,"     . helm-gtags-pop-stack)))
 
 
 ;;; Create Header Guards with f12
