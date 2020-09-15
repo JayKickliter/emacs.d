@@ -7,6 +7,7 @@
   :ensure t)
 
 (use-package rust-mode
-  :ensure t)
+  :ensure t
+  :hook (set-fill-column 60))
 
 (provide 'init-rust)
