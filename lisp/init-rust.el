@@ -8,6 +8,6 @@
 
 (use-package rust-mode
   :ensure t
-  :hook (set-fill-column 60))
+  :hook (set-fill-column 84))
 
 (provide 'init-rust)
