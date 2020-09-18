@@ -8,6 +8,8 @@
 
 (use-package rust-mode
   :ensure t
-  :hook (set-fill-column 84))
+  :bind (("C-c C-e" . lsp-rust-analyzer-expand-macro)
+         ("M-." . lsp-find-definition))
+  :config (set-fill-column 84))
 
 (provide 'init-rust)
