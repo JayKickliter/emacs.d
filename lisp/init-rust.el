@@ -9,7 +9,8 @@
 (use-package rust-mode
   :ensure t
   :bind (("C-c C-e" . lsp-rust-analyzer-expand-macro)
-         ("M-." . lsp-find-definition))
+         ("M-." . xref-find-definitions)
+         ("M-," . xref-pop-marker-stack))
   :config (set-fill-column 84))
 
 (provide 'init-rust)
