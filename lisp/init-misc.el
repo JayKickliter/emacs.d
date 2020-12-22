@@ -80,6 +80,14 @@
                                                                     "*compilation*"))
                        (message "No Compilation Errors!"))))))
 
+
+(defun xref-save-marker (&optional marker-point)
+    "An interactive version of `xref-push-marker-stack'."
+    (interactive)
+    (xref-push-marker-stack marker-point))
+
+(define-key global-map (kbd "M-m") #'xref-save-marker)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Full width comment box                                                 ;;
 ;; from http://irreal.org/blog/?p=374                                     ;;
