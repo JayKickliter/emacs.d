@@ -181,13 +181,12 @@
 ;; use M-S-up and M-S-down, which will work even in lisp modes.
 ;;----------------------------------------------------------------------------
 (require-package 'move-dup)
-(global-set-key [M-up] 'md-move-lines-up)
-(global-set-key [M-down] 'md-move-lines-down)
-(global-set-key [M-S-up] 'md-move-lines-up)
-(global-set-key [M-S-down] 'md-move-lines-down)
-
-(global-set-key (kbd "C-c p") 'md-duplicate-down)
-(global-set-key (kbd "C-c P") 'md-duplicate-up)
+(global-set-key [M-up] 'move-dup-move-lines-up)
+(global-set-key [M-down] 'move-dup-move-lines-down)
+(global-set-key [M-S-up] 'move-dup-move-lines-up)
+(global-set-key [M-S-down] 'move-dup-move-lines-down)
+(global-set-key (kbd "C-c p") 'move-dup-duplicate-down)
+(global-set-key (kbd "C-c P") 'move-dup-duplicate-up)
 
 ;;----------------------------------------------------------------------------
 ;; Fix backward-up-list to understand quotes, see http://bit.ly/h7mdIL
