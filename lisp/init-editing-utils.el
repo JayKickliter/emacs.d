@@ -289,5 +289,6 @@ With arg N, insert N newlines."
 (guide-key-mode 1)
 (diminish 'guide-key-mode)
 
+(global-set-key [f9] 'kill-this-buffer)
 
 (provide 'init-editing-utils)
