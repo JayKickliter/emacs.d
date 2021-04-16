@@ -13,4 +13,6 @@
   "Run hideshow-expand affected block when using `goto-line' in a collapsed buffer."
   (save-excursion (hs-show-block)))
 
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
 (provide 'init-hideshow)
