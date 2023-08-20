@@ -21,9 +21,20 @@
   (global-set-key (kbd "M-ˍ") 'ns-do-hide-others) ;; what describe-key reports for cmd-option-h
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Global Key Bindings                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key (kbd "C-c C-c") 'mc/edit-lines)
+(global-set-key (kbd "<f9>") 'kill-this-buffer)
+(global-set-key [f5]
+                (lambda ()
+                  (interactive)
+                  (revert-buffer t t t)
+                  (message "buffer is reverted")))
 
-;;; Rust
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LSP                                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
   :ensure t
   :hook (rust-mode . lsp)
@@ -48,15 +59,46 @@
     :ignore-messages nil
     :server-id 'rust-analyzer-remote)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Neotree                                                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package neotree
   :ensure t
-  :custom
-  (neo-vc-integration '(face))
-  )
+  :bind (("M-<f8>" . neotree-toggle)
+         ("f8" . neo-project-dir))
+  :custom (neo-vc-integration '(face char)))
 
+(defun neo-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+        (file-name (buffer-file-name)))
+    (if project-dir (progn (neotree)
+                           (neotree-dir project-dir)
+                           (neotree-find file-name))
+      (message "Could not find git project root."))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Golden Ratio                                                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package golden-ratio
-  :ensure t
-  :hook (golden-ratio-mode (lambda () (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")))
-  )
+  :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Full width comment box                                                 ;;
+;; from http://irreal.org/blog/?p=374                                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun bjm-comment-box (b e)
+  "Draw a box comment around the region but arrange for the region to extend to at least the fill column.  Place the point after the comment box."
+  (interactive "r")
+  (let ((e (copy-marker e t)))
+    (goto-char b)
+    (end-of-line)
+    (insert-char ?  (- fill-column (current-column)))
+    (comment-box b e 1)
+    (goto-char e)
+    (set-marker e nil)))
+
+(global-set-key (kbd "C-c b b") 'bjm-comment-box)
 
 (provide 'init-local)
