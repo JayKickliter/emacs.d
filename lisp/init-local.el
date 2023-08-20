@@ -65,7 +65,7 @@
 (use-package neotree
   :ensure t
   :bind (("M-<f8>" . neotree-toggle)
-         ("f8" . neo-project-dir))
+         ("<f8>" . neo-project-dir))
   :custom (neo-vc-integration '(face char)))
 
 (defun neo-project-dir ()
