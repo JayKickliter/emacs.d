@@ -38,6 +38,7 @@
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'clang-format-region-or-buffer)
             (hs-minor-mode)
+            (setq lsp-lens-enable nil)
             (setq comment-start   "/*" comment-end     "*/" comment-padding " ")))
 
 ;; Don't indent in extern "C" regions
