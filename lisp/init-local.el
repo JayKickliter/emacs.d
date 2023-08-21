@@ -70,21 +70,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Neotree                                                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun neo-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (projectile-project-root))
-        (file-name (buffer-file-name)))
-    (if project-dir (progn (neotree)
-                           (neotree-dir project-dir)
-                           (neotree-find file-name))
-      (message "Could not find git project root."))))
+
 
 (use-package neotree
   :ensure t
   :init (require 'neotree)
   :bind (("M-<f8>" . neotree-toggle)
-         ("<f8>" . neo-project-dir))
+         ([f8] . (lambda ()
+                   "Open NeoTree using the git root."
+                   (interactive)
+                   (let ((project-dir (projectile-project-root))
+                         (file-name (buffer-file-name)))
+                     (if project-dir (progn (neotree)
+                                            (neotree-dir project-dir)
+                                            (neotree-find file-name))
+                       (message "Could not find git project root."))))))
+  ;; For edited files: hightlight (face) and prefix names with `E' (char).
   :custom (neo-vc-integration '(face char)))
 
 
