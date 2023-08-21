@@ -70,12 +70,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Neotree                                                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package neotree
-  :ensure t
-  :bind (("M-<f8>" . neotree-toggle)
-         ("<f8>" . neo-project-dir))
-  :custom (neo-vc-integration '(face char)))
-
 (defun neo-project-dir ()
   "Open NeoTree using the git root."
   (interactive)
@@ -85,6 +79,13 @@
                            (neotree-dir project-dir)
                            (neotree-find file-name))
       (message "Could not find git project root."))))
+
+(use-package neotree
+  :ensure t
+  :init (require 'neotree)
+  :bind (("M-<f8>" . neotree-toggle)
+         ("<f8>" . neo-project-dir))
+  :custom (neo-vc-integration '(face char)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,5 +111,6 @@
     (set-marker e nil)))
 
 (global-set-key (kbd "C-c b b") 'bjm-comment-box)
+
 
 (provide 'init-local)
