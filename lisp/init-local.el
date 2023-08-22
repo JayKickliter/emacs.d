@@ -18,8 +18,8 @@
   (global-set-key (kbd "A-<backspace>") 'backward-kill-word)
   (global-set-key (kbd "M-<left>") 'move-beginning-of-line)
   (global-set-key (kbd "M-<right>") 'move-end-of-line)
-  (global-set-key (kbd "M-ˍ") 'ns-do-hide-others) ;; what describe-key reports for cmd-option-h
-  )
+  ;; what describe-key reports for cmd-option-h
+  (global-set-key (kbd "M-ˍ") 'ns-do-hide-others))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package                                                            ;;
@@ -40,7 +40,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; LSP                                                                    ;;
+;; LSP/Rust                                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
   :ensure t
@@ -66,12 +66,13 @@
     :ignore-messages nil
     :server-id 'rust-analyzer-remote)))
 
+(with-eval-after-load "rust-mode"
+  (define-key rust-mode-map (kbd "C-h C-d") 'lsp-rust-analyzer-open-external-docs))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Neotree                                                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 (use-package neotree
   :ensure t
   :init (require 'neotree)
