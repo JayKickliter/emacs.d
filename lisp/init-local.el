@@ -33,7 +33,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Key Bindings                                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "<f9>") 'kill-this-buffer)
+(global-set-key [f9] 'kill-this-buffer)
+(global-set-key (kbd "M-;") 'comment-dwim)
 (global-set-key [f5]
                 (lambda ()
                   (interactive)
