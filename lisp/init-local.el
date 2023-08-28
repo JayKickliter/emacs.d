@@ -21,6 +21,9 @@
   ;; what describe-key reports for cmd-option-h
   (global-set-key (kbd "M-ˍ") 'ns-do-hide-others))
 
+(remove-hook 'prog-mode-hook 'flymake-mode)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package                                                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
