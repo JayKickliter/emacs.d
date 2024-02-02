@@ -61,19 +61,27 @@
 (use-package lsp-ui
   :ensure t)
 
+(defun start-file-process-shell-command@around (start-file-process-shell-command name buffer &rest args)
+  "Start a program in a subprocess.  Return the process object for it.
+Similar to `start-process-shell-command', but calls `start-file-process'."
+  ;; On remote hosts, the local `shell-file-name' might be useless.
+  (let ((command (mapconcat 'identity args " ")))
+    (funcall start-file-process-shell-command name buffer command)))
+
+(advice-add 'start-file-process-shell-command :around #'start-file-process-shell-command@around)
+
 (with-eval-after-load "lsp-rust"
   (lsp-register-client
    (make-lsp-client
-    :new-connection (lsp-tramp-connection "rust-analyzer")
-    :remote? t
+    :new-connection (lsp-tramp-connection
+                     (executable-find (car lsp-rust-analyzer-server-command)))
     :major-modes '(rust-mode rustic-mode)
+    :priority (if (eq lsp-rust-server 'rust-analyzer) 1 -1)
+    :remote? t
     :initialization-options 'lsp-rust-analyzer--make-init-options
     :notification-handlers (ht<-alist lsp-rust-notification-handlers)
-    :action-handlers (ht ("rust-analyzer.runSingle" #'lsp-rust--analyzer-run-single))
+    :action-handlers (ht<-alist lsp-rust-action-handlers)
     :library-folders-fn (lambda (_workspace) lsp-rust-library-directories)
-    :after-open-fn (lambda ()
-                     (when lsp-rust-analyzer-server-display-inlay-hints
-                       (lsp-rust-analyzer-inlay-hints-mode)))
     :ignore-messages nil
     :server-id 'rust-analyzer-remote)))
 
@@ -110,6 +118,17 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Clang Format                                                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package clang-format
+  :ensure t
+  :init
+  (add-hook 'c-mode-common-hook
+            #'(lambda ()
+                (local-set-key (kbd "C-c C-f") 'clang-format-buffer))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Full width comment box                                                 ;;
 ;; from http://irreal.org/blog/?p=374                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -126,5 +145,17 @@
 
 (global-set-key (kbd "C-c b b") 'bjm-comment-box)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; The command ‘M-x reverse-region’ will reverse the lines a region.      ;;
+;; https://www.emacswiki.org/emacs/ReverseWords                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun reverse-words (beg end)
+  "Reverse the order of words in region."
+  (interactive "*r")
+  (apply
+   'insert
+   (reverse
+    (split-string
+     (delete-and-extract-region beg end) "\\b"))))
 
 (provide 'init-local)
