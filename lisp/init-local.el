@@ -159,3 +159,14 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
      (delete-and-extract-region beg end) "\\b"))))
 
 (provide 'init-local)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Hide/Show mode                                                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-prog-mode-hook ()
+  (hs-minor-mode)
+  (local-set-key (kbd "C-c s a") 'hs-show-all)
+  (local-set-key (kbd "C-c h a") 'hs-hide-all)
+  (local-set-key (kbd "C-c s s") 'hs-show-block)
+  (local-set-key (kbd "C-c h h") 'hs-hide-block))
+(add-hook 'prog-mode-hook 'my-prog-mode-hook)
