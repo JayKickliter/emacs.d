@@ -33,15 +33,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Key Bindings                                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "M-j") 'default-indent-new-line)
-(global-set-key [f9] 'kill-this-buffer)
 (global-set-key (kbd "M-;") 'comment-dwim)
-(global-set-key [f5]
-                (lambda ()
-                  (interactive)
-                  (revert-buffer t t t)
-                  (message "buffer is reverted")))
-
+(global-set-key (kbd "M-j") 'default-indent-new-line)
+(global-set-key [f5] (lambda ()
+                       (interactive)
+                       (revert-buffer t t t)
+                       (message "buffer is reverted")))
+(global-set-key [f9] 'kill-this-buffer)
+(global-set-key [home] 'beginning-of-buffer)
+(global-set-key [end] 'end-of-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; multiple-cursors                                                       ;;
