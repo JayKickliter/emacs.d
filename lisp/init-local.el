@@ -166,8 +166,9 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-prog-mode-hook ()
   (hs-minor-mode)
-  (local-set-key (kbd "C-c s a") 'hs-show-all)
   (local-set-key (kbd "C-c h a") 'hs-hide-all)
-  (local-set-key (kbd "C-c s s") 'hs-show-block)
-  (local-set-key (kbd "C-c h h") 'hs-hide-block))
+  (local-set-key (kbd "C-c h h") 'hs-hide-block)
+  (local-set-key (kbd "C-c h l") 'hs-hide-level)
+  (local-set-key (kbd "C-c s a") 'hs-show-all)
+  (local-set-key (kbd "C-c s s") 'hs-show-block))
 (add-hook 'prog-mode-hook 'my-prog-mode-hook)
