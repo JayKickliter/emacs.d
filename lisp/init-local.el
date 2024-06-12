@@ -33,6 +33,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Key Bindings                                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "A-M-.") 'lsp-find-references)
 (global-set-key (kbd "M-;") 'comment-dwim)
 (global-set-key (kbd "M-j") 'default-indent-new-line)
 (global-set-key [f5] (lambda ()
