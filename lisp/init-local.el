@@ -172,3 +172,12 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
   (local-set-key (kbd "C-c s a") 'hs-show-all)
   (local-set-key (kbd "C-c s s") 'hs-show-block))
 (add-hook 'prog-mode-hook 'my-prog-mode-hook)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; xref                                                                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-xref-push-marker-stack()
+  (interactive)
+  (xref-push-marker-stack))
+
+(global-set-key (kbd "A-M-.") 'my-xref-push-marker-stack)
