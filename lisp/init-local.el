@@ -109,6 +109,18 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
   ;; For edited files: hightlight (face) and prefix names with `E' (char).
   :custom (neo-vc-integration '(face char)))
 
+(setq projectile-switch-project-action
+      (lambda ()
+        "Open NeoTree using the git root."
+        (interactive)
+        (let ((project-dir (projectile-project-root))
+              (file-name (buffer-file-name)))
+          (if project-dir (progn (neotree)
+                                 (neotree-dir project-dir)
+                                 (neotree-find file-name))
+            (message "Could not find git project root.")))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golden Ratio                                                           ;;
