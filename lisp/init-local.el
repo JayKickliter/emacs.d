@@ -56,7 +56,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
   :ensure t
-  :hook (rust-mode . lsp)
+  :hook ((rust-mode . lsp)
+         (erlang-mode . lsp))
   :commands lsp)
 
 (use-package lsp-ui
