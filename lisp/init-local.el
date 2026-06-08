@@ -56,8 +56,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
   :ensure t
-  :hook ((rust-mode . lsp)
-         (erlang-mode . lsp))
+  :hook ((erlang-mode . lsp)
+         (js-mode . lsp)
+         (rust-mode . lsp)
+         (typescript-mode . lsp))
+  :bind ("M-C-." . lsp-goto-type-definition)
+  :bind ("C-c C-f" . lsp-format-buffer)
   :commands lsp)
 
 (use-package lsp-ui
@@ -171,6 +175,14 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
    (reverse
     (split-string
      (delete-and-extract-region beg end) "\\b"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ensure full opacity on startup                                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (display-graphic-p)
+              (modify-frame-parameters nil '((alpha . 100))))))
 
 (provide 'init-local)
 
