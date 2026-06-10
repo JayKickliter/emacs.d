@@ -184,6 +184,17 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
             (when (display-graphic-p)
               (modify-frame-parameters nil '((alpha . 100))))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flatbuffers Mode (alexmurray fork, not the MELPA Asalle version)        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package-vc)
+(let ((desc (cadr (assq 'flatbuffers-mode package-alist))))
+  (when (and desc (not (package-vc-p desc)))
+    (package-delete desc t)))
+(unless (package-installed-p 'flatbuffers-mode)
+  (package-vc-install "https://github.com/alexmurray/flatbuffers-mode"))
+(use-package flatbuffers-mode)
+
 (provide 'init-local)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
