@@ -23,6 +23,14 @@
 
 (remove-hook 'prog-mode-hook 'flymake-mode)
 
+;; Override upstream theme with solarized-dark
+(setq-default custom-enabled-themes '(sanityinc-solarized-dark))
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq custom-enabled-themes '(sanityinc-solarized-dark))
+            (reapply-themes))
+          t) ;; append so it runs after the upstream reapply-themes hook
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package                                                            ;;
@@ -60,9 +68,16 @@
          (js-mode . lsp)
          (rust-mode . lsp)
          (typescript-mode . lsp))
-  :bind ("M-C-." . lsp-goto-type-definition)
-  :bind ("C-c C-f" . lsp-format-buffer)
-  :commands lsp)
+  :bind (("M-C-." . lsp-goto-type-definition)
+         ("C-c C-f" . lsp-format-buffer))
+  :commands lsp
+  :config
+  (defun my/lsp-rust-analyzer-init-options (original)
+    (let ((opts (funcall original)))
+      (plist-put (plist-get opts :cargo) :targetDir t)
+      opts))
+  (advice-add 'lsp-rust-analyzer--make-init-options
+              :around #'my/lsp-rust-analyzer-init-options))
 
 (use-package lsp-ui
   :ensure t)
