@@ -210,7 +210,11 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
   (package-vc-install "https://github.com/alexmurray/flatbuffers-mode"))
 (use-package flatbuffers-mode)
 
-(provide 'init-local)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; WIT mode                                                               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package wit-mode
+  :vc (:url "https://github.com/JayKickliter/emacs-wit-mode.git" :rev :newest))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Hide/Show mode                                                         ;;
@@ -232,3 +236,6 @@ Similar to `start-process-shell-command', but calls `start-file-process'."
   (xref-push-marker-stack))
 
 (global-set-key (kbd "A-M-.") 'my-xref-push-marker-stack)
+
+(provide 'init-local)
+;;; init-local.el ends here
